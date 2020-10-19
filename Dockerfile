@@ -5,6 +5,8 @@ MAINTAINER Angel Rodriguez  "angel@quantumobject.com"
 
 ENV TZ America/New_York
 
+ARG CACTIVER
+
 # Update the container
 #Installation of nesesary package/software for this containers...
 RUN apt-get update && echo $TZ > /etc/timezone && DEBIAN_FRONTEND=noninteractive apt-get install -yq --no-install-recommends mariadb-server mariadb-client php build-essential automake \
@@ -18,7 +20,7 @@ RUN apt-get update && echo $TZ > /etc/timezone && DEBIAN_FRONTEND=noninteractive
                                                             snmpd python-netsnmp libnet-snmp-perl snmp-mibs-downloader \
                                                             iputils-ping autoconf unzip \
                     && cd /opt/ \
-                    && wget https://www.cacti.net/downloads/cacti-latest.tar.gz \
+                    && wget -O cacti-latest.tar.gz https://www.cacti.net/downloads/cacti-${CACTIVER}.tar.gz \
                     && ver=$(tar -tf cacti-latest.tar.gz | head -n1 | tr -d /) \
                     && tar -xvf cacti-latest.tar.gz && mv $ver cacti \
                     && rm cacti-latest.tar.gz \
