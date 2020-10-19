@@ -17,6 +17,7 @@ max_heap_table_size = 1073741824
 max_allowed_packet = 16777216
 tmp_table_size = 500M
 join_buffer_size = 1000M
+innodb_additional_mem_pool_size=90M
 innodb_file_format=Barracuda
 innodb_large_prefix=1
 innodb_io_capacity=5000

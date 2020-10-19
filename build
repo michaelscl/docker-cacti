@@ -3,7 +3,7 @@ set -e
 
 CACTIVER=1.2.14
 
-DOCKER_RUN_IMAGE=michaelscz/cacti:${CACTIVER}
+DOCKER_RUN_IMAGE=michaelscz/cacti-template:${CACTIVER}
 
 sudo docker build --build-arg CACTIVER=${CACTIVER} -t "${DOCKER_RUN_IMAGE}" .
 
