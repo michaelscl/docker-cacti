@@ -3,9 +3,9 @@
 FROM quantumobject/docker-baseimage:18.04
 MAINTAINER Angel Rodriguez  "angel@quantumobject.com"
 
-ENV TZ America/New_York
+ENV TZ Europe/Prague
 
-ARG CACTIVER=1.2.15
+ARG CACTIVER=1.2.16
 
 # Update the container
 #Installation of nesesary package/software for this containers...
