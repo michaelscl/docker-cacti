@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-CACTIVER=1.2.14
+CACTIVER=1.2.16
 
-DOCKER_RUN_IMAGE=michaelscz/cacti-template:${CACTIVER}
+DOCKER_RUN_IMAGE=michaelscz/cacti:${CACTIVER}
 
 sudo docker build --build-arg CACTIVER=${CACTIVER} -t "${DOCKER_RUN_IMAGE}" .
 

@@ -1,7 +1,7 @@
 #name of container: docker-cacti
 #versison of container: 0.6.4
 FROM quantumobject/docker-baseimage:18.04
-MAINTAINER Angel Rodriguez  "angel@quantumobject.com"
+LABEL author Angel Rodriguez  "angel@quantumobject.com"
 
 ENV TZ Europe/Prague
 
@@ -16,7 +16,7 @@ RUN apt-get update && echo $TZ > /etc/timezone && DEBIAN_FRONTEND=noninteractive
                                                             php-pspell php-recode php-tidy php-xmlrpc \
                                                             php-xml php-ldap php-mbstring php-intl \
                                                             php-gd php-snmp php-gmp php-curl php-net-socket\
-                                                            libmysqlclient-dev libsnmp-dev dos2unix help2man git \
+                                                            libmysqlclient-dev libsnmp-dev dos2unix help2man git mc \
                                                             snmpd python-netsnmp libnet-snmp-perl snmp-mibs-downloader \
                                                             iputils-ping autoconf unzip \
                     && cd /opt/ \
@@ -83,9 +83,15 @@ RUN chmod +x /sbin/pre-conf ; sync \
     && /bin/bash -c /sbin/pre-conf \
     && rm /sbin/pre-conf
 
-# Volume for container   
-VOLUME /opt/cacti/plugins /var/log /opt/cacti/templates /var/lib/mysql /opt/cacti/rra
+#backup
+RUN mkdir /backups
+COPY backup.sh /backups/backup.sh
+COPY restore.sh /backups/restore.sh
+RUN  chmod a+x /backups/*
 
+# Volume for container   
+#VOLUME /opt/cacti/plugins /var/log /opt/cacti/templates /var/lib/mysql /opt/cacti/rra /backup
+VOLUME /backups
 
 # to allow access from outside of the container  to the container service
 # at that ports need to allow access from firewall if need to access it outside of the server.
